@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro Backend Dev Final Proj.</title>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <input type="number" id="value1">
+    <select id="arithOperator">
+        <option value="add">+</option>
+        <option value="sub">-</option>
+        <option value="mul">*</option>
+        <option value="div">/</option>
+    </select>
+    <input type="number" id="value2">
+    <button onclick="calculate()">Calculate</button>
+    <p id="result">Result : </h1>
+    <script>
+        function calculate() {
+            const numberA = document.getElementById("value1").value
+            const numberB = document.getElementById("value2").value
+            const operator = document.getElementById("arithOperator").value
+            const result = document.getElementById("result")
+
+            fetch(`http://localhost:3000/calculator/${operator}?${(new URLSearchParams({ value1: numberA, value2: numberB })).toString()}` , {
+                "method": "POST",
+            })
+            .then((res) => {
+                return res.json()
+            })
+            .then((payload) => {
+                result.innerText = "Result : " + payload.result.toString()
+            })
+        }
+    </script>
+</body>
+</html>
