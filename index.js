@@ -95,6 +95,29 @@ app.post("/bmi", (req, res) => {
     )
 })
 
+app.get("/intro", (req, res) => {
+    return res.status(200).json(
+        {
+            "generic": {
+                "name": "Konlayuth",
+                "surname": "Ungpraphon",
+                "nickname": "Poom",
+                "age": 17,
+            },
+            "school": {
+                "studyYear": "M5",
+                "school": "Kanchanapisekwittayalai Nakhon Pathom",
+                "generation": 28,
+
+                "class": "Pre-Engineering",
+            },
+            "contacts": {
+                "instagram": "konlayuth_u"
+            }
+        }
+    )
+})
+
 app.listen(3000, () => {
     console.log("server has started sucessfully")
 })

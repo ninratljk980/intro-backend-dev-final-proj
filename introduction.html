@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro Backend Dev Final Proj.</title>
+</head>
+<body>
+    <div style="margin: auto; text-align: center;">
+        <h1>Moin!</h1>
+        <img style="max-width: 40%;" src="https://www.iamexpat.de/_next/image?url=https%3A%2F%2Fdirectus.iamexpat.com%2Fassets%2F6f34517c-2f48-4753-b8ad-1b9ee256cbef&w=1920&q=75">
+        <p id="text">test</p>
+        <a id="socialmedia_instagram">
+            <img style="max-width: 50px; max-height: 50px;" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png?utm_source=th.wikipedia.org&utm_campaign=index&utm_content=thumbnail">
+        </a>
+    </div>
+    <script>
+        const paragraph = document.getElementById("text")
+        const igButton = document.getElementById("socialmedia_instagram")
+        
+        fetch("http://localhost:3000/intro")
+        .then((res) => {
+            return res.json()
+        })
+        .then((payload) => {
+            paragraph.innerHTML = `My name is ${payload.generic.name} ${payload.generic.surname}, but you can call me ${payload.generic.nickname}. I am ${payload.generic.age} years old.<br/><br/>I am a ${payload.school.studyYear} student at ${payload.school.school} (${payload.school.generation}th generation). I take courses in ${payload.school.class}.`
+            igButton.href = "https://instagram.com/" + payload.contacts.instagram
+        })
+    </script>
+</body>
+</html>
