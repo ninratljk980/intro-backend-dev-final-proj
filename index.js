@@ -6,6 +6,8 @@ app.use(express.json())
 app.use(express.urlencoded({ "extended": true }))
 app.use(cors())
 
+// ตอนที่ 1 CALCULATOR
+
 app.post("/calculator/add", (req, res) => {
     const value1 = Number(req.query.value1)
     const value2 = Number(req.query.value2)
@@ -41,6 +43,9 @@ app.post("/calculator/div", (req, res) => {
         { "result": status ? (value1 / value2) : "Failure" }
     )
 })
+
+
+// ตอนที่ 2 BMI CALCULATOR
 
 app.post("/bmi", (req, res) => {
     let height = Number(req.query.height)
@@ -94,6 +99,8 @@ app.post("/bmi", (req, res) => {
         } : { "result": "Failure" }
     )
 })
+
+// ตอนที่ 3 INTRODUCTION
 
 app.get("/intro", (req, res) => {
     return res.status(200).json(
