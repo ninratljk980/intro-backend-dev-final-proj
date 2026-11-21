@@ -6,34 +6,29 @@
     <title>Intro Backend Dev Final Proj.</title>
 </head>
 <body>
-    <h1>Calculator</h1>
-    <input type="number" id="value1">
-    <select id="arithOperator">
-        <option value="add">+</option>
-        <option value="sub">-</option>
-        <option value="mul">*</option>
-        <option value="div">/</option>
-    </select>
-    <input type="number" id="value2">
-    <button onclick="calculate()">Calculate</button>
-    <p id="result">Result : </h1>
+    <div style="margin: auto; text-align: center;">
+        <h1>Moin!</h1>
+        <div>
+            <img style="max-width: 40%;" src="https://www.iamexpat.de/_next/image?url=https%3A%2F%2Fdirectus.iamexpat.com%2Fassets%2F6f34517c-2f48-4753-b8ad-1b9ee256cbef&w=1920&q=75">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/UuAevxbgjc8?si=2ShBwrfTboXN4MzA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <p id="text">test</p>
+        <a id="socialmedia_instagram">
+            <img style="max-width: 50px; max-height: 50px;" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png?utm_source=th.wikipedia.org&utm_campaign=index&utm_content=thumbnail">
+        </a>
+    </div>
     <script>
-        function calculate() {
-            const numberA = document.getElementById("value1").value
-            const numberB = document.getElementById("value2").value
-            const operator = document.getElementById("arithOperator").value
-            const result = document.getElementById("result")
-
-            fetch(`http://localhost:3000/calculator/${operator}?${(new URLSearchParams({ value1: numberA, value2: numberB })).toString()}` , {
-                "method": "POST",
-            })
-            .then((res) => {
-                return res.json()
-            })
-            .then((payload) => {
-                result.innerText = "Result : " + payload.result.toString()
-            })
-        }
+        const paragraph = document.getElementById("text")
+        const igButton = document.getElementById("socialmedia_instagram")
+        
+        fetch("http://localhost:3000/intro")
+        .then((res) => {
+            return res.json()
+        })
+        .then((payload) => {
+            paragraph.innerHTML = `My name is ${payload.generic.name} ${payload.generic.surname}, but you can call me ${payload.generic.nickname}. I am ${payload.generic.age} years old.<br/><br/>I am a ${payload.school.studyYear} student at ${payload.school.school} (${payload.school.generation}th generation). I take courses in ${payload.school.class}.`
+            igButton.href = "https://instagram.com/" + payload.contacts.instagram
+        })
     </script>
 </body>
 </html>
